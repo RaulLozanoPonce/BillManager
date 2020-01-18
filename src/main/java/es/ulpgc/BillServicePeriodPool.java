@@ -11,10 +11,11 @@ public class BillServicePeriodPool {
 
     public BillServicePeriodPool() {
         billTimeLine = new TreeSet<>();
+        startDate = null;
+        finishDate = null;
     }
 
     public BillServicePeriodPool(BillServicePeriod billServicePeriod) {
-        this();
     }
 
     public SortedSet<BillServicePeriod> getBillTimeLine() {

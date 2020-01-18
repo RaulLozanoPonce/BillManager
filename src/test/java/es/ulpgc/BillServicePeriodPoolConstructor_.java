@@ -16,10 +16,22 @@ public class BillServicePeriodPoolConstructor_ {
     private static Object[][] cases;
 
     static {
+        Date d1 = new Date(1, Date.FEBRUARY, 2019);
+        Date d2 = new Date(3, Date.MARCH, 2019);
+        Date d3 = new Date(2, Date.APRIL, 2019);
+
+        BillServicePeriod bsp1 = new BillServicePeriod(d1, d2);
+
         BillServicePeriodPool bspp1 = new BillServicePeriodPool();
+        BillServicePeriodPool bspp2 = new BillServicePeriodPool(bsp1);
+        BillServicePeriodPool bspp3 = new BillServicePeriodPool(d2, d3);
+        BillServicePeriodPool bspp4 = new BillServicePeriodPool(bsp1, d1, d3);
 
         cases = new Object[][] {
-                {bspp1, 0, null, null, null, NoSuchElementException.class}
+                {bspp1, 0, null, null, null, NoSuchElementException.class},
+                {bspp2, 1, bsp1, d1, d2, null},
+                {bspp3, 0, null, d2, d3, NoSuchElementException.class},
+                {bspp4, 1, bsp1, d1, d3, null}
         };
     }
 

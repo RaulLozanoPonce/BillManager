@@ -10,12 +10,23 @@ public class BillServicePeriodPool {
     private Date finishDate;
 
     public BillServicePeriodPool() {
-        billTimeLine = new TreeSet<>();
-        startDate = null;
-        finishDate = null;
+        this(null, null);
     }
 
     public BillServicePeriodPool(BillServicePeriod billServicePeriod) {
+        this(billServicePeriod.getStartDate(), billServicePeriod.getFinishDate());
+        billTimeLine.add(billServicePeriod);
+    }
+
+    public BillServicePeriodPool(BillServicePeriod billServicePeriod, Date startDate, Date finishDate) {
+        this(startDate, finishDate);
+        billTimeLine.add(billServicePeriod);
+    }
+
+    public BillServicePeriodPool(Date startDate, Date finishDate) {
+        billTimeLine = new TreeSet<>();
+        this.startDate = startDate;
+        this.finishDate = finishDate;
     }
 
     public SortedSet<BillServicePeriod> getBillTimeLine() {

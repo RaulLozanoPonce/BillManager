@@ -9,8 +9,9 @@ public class BillServicePeriodPoolChecker {
     }
 
     public boolean addBill(BillServicePeriod billServicePeriod) {
-        billServicePeriodPool.setStartDate(billServicePeriod.getStartDate());
-        billServicePeriodPool.setFinishDate(billServicePeriod.getFinishDate());
+        if(billServicePeriodPool.getStartDate() == null)
+            billServicePeriodPool.setStartDate(billServicePeriod.getStartDate());
+        billServicePeriodPool.setFinishDate(new Date().now());
         return billServicePeriodPool.getBillTimeLine().add(billServicePeriod);
     }
 

@@ -13,16 +13,31 @@ public class BillServicePeriodPoolCheckerAddBill_ {
     private static Object[][] cases;
 
     static {
+        Date dateNow = new Date().now();
+
         Date d1 = new Date(1, Date.FEBRUARY, 2019);
         Date d2 = new Date(3, Date.MARCH, 2019);
+        Date d3 = new Date(4, Date.MARCH, 2019);
+        Date d4 = new Date(6, Date.APRIL, 2019);
 
         BillServicePeriod bsp1 = new BillServicePeriod(d1, d2);
+        BillServicePeriod bsp2 = new BillServicePeriod(d3, d4);
 
-        BillServicePeriodPool bspl1 = new BillServicePeriodPool();
-        BillServicePeriodPoolChecker bsppc1 = new BillServicePeriodPoolChecker(bspl1);
+        BillServicePeriodPool bspp1 = new BillServicePeriodPool();
+        BillServicePeriodPool bspp2 = new BillServicePeriodPool(bsp1);
+        BillServicePeriodPool bspp3 = new BillServicePeriodPool(d2, d3);
+        BillServicePeriodPool bspp4 = new BillServicePeriodPool(bsp1, d1, d3);
+
+        BillServicePeriodPoolChecker bsppc1 = new BillServicePeriodPoolChecker(bspp1);
+        BillServicePeriodPoolChecker bsppc2 = new BillServicePeriodPoolChecker(bspp2);
+        BillServicePeriodPoolChecker bsppc3 = new BillServicePeriodPoolChecker(bspp3);
+        BillServicePeriodPoolChecker bsppc4 = new BillServicePeriodPoolChecker(bspp4);
 
         cases = new Object[][] {
-                {bsppc1, bspl1, bsp1, 1, d1, d2, true}
+                {bsppc1, bspp1, bsp1, 1, d1, dateNow, true},
+                {bsppc2, bspp2, bsp2, 2, d1, dateNow, true},
+                {bsppc3, bspp3, bsp2, 1, d2, dateNow, true},
+                {bsppc4, bspp4, bsp2, 2, d1, dateNow, true}
         };
     }
 
@@ -52,7 +67,10 @@ public class BillServicePeriodPoolCheckerAddBill_ {
         assertThat(isAdded).isEqualTo(this.isAdded);
         assertThat(billServicePeriodPool.getBillTimeLine().size()).isEqualTo(billTimeLineSize);
         assertThat(billServicePeriodPool.getStartDate()).isEqualTo(startDate);
-        assertThat(billServicePeriodPool.getFinishDate()).isEqualTo(finishDate);
+
+        assertThat(billServicePeriodPool.getFinishDate().getDay()).isEqualTo(finishDate.getDay());
+        assertThat(billServicePeriodPool.getFinishDate().getMonth()).isEqualTo(finishDate.getMonth());
+        assertThat(billServicePeriodPool.getFinishDate().getYear()).isEqualTo(finishDate.getYear());
     }
 
     @Parameterized.Parameters

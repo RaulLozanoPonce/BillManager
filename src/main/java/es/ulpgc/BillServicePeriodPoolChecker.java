@@ -1,5 +1,7 @@
 package es.ulpgc;
 
+import java.util.List;
+
 public class BillServicePeriodPoolChecker {
 
     private final BillServicePeriodPool billServicePeriodPool;
@@ -48,11 +50,19 @@ public class BillServicePeriodPoolChecker {
         return false;
     }
 
-    public boolean isOverlapping() {
-        return true;
+    public boolean isOverlapping(List<BillServicePeriod> billServicePeriodList, BillServicePeriod billServicePeriod) {
+        for (int i = 0; i < billServicePeriodList.size(); i++) {
+            BillServicePeriod bsp = billServicePeriodList.get(i);
+            if(billServicePeriod.getStartDate().compareTo(bsp.getStartDate()) == 0) return true;
+            if(billServicePeriod.getFinishDate().compareTo(bsp.getFinishDate()) == 0) return true;
+            if(billServicePeriod.getStartDate().compareTo(bsp.getStartDate()) < 0 && billServicePeriod.getFinishDate().compareTo(bsp.getStartDate()) >= 0) return true;
+            if(billServicePeriod.getStartDate().compareTo(bsp.getStartDate()) >= 0 && billServicePeriod.getFinishDate().compareTo(bsp.getFinishDate()) <= 0) return true;
+            if(billServicePeriod.getStartDate().compareTo(bsp.getFinishDate()) <= 0 && billServicePeriod.getFinishDate().compareTo(bsp.getFinishDate()) > 0) return true;
+        }
+        return false;
     }
 
-    public boolean isHavingGaps() {
+    public boolean isHavingGaps(List<BillServicePeriod> billServicePeriodList, BillServicePeriod billServicePeriod) {
         return true;
     }
 

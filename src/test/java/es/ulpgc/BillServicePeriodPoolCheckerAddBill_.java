@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(org.junit.runners.Parameterized.class)
 public class BillServicePeriodPoolCheckerAddBill_ {
@@ -13,7 +15,7 @@ public class BillServicePeriodPoolCheckerAddBill_ {
     private static Object[][] cases;
 
     static {
-        Date dateNow = new Date().now();
+        Date dateNow = new Date(7, Date.APRIL, 2019);
 
         Date d1 = new Date(1, Date.FEBRUARY, 2019);
         Date d2 = new Date(3, Date.MARCH, 2019);
@@ -32,6 +34,15 @@ public class BillServicePeriodPoolCheckerAddBill_ {
         BillServicePeriodPoolChecker bsppc2 = new BillServicePeriodPoolChecker(bspp2);
         BillServicePeriodPoolChecker bsppc3 = new BillServicePeriodPoolChecker(bspp3);
         BillServicePeriodPoolChecker bsppc4 = new BillServicePeriodPoolChecker(bspp4);
+
+        bsppc1.setUpdaterDate(mock(Date.class));
+        when(bsppc1.getUpdaterDate().now()).thenReturn(new Date(7, Date.APRIL, 2019));
+        bsppc2.setUpdaterDate(mock(Date.class));
+        when(bsppc2.getUpdaterDate().now()).thenReturn(new Date(7, Date.APRIL, 2019));
+        bsppc3.setUpdaterDate(mock(Date.class));
+        when(bsppc3.getUpdaterDate().now()).thenReturn(new Date(7, Date.APRIL, 2019));
+        bsppc4.setUpdaterDate(mock(Date.class));
+        when(bsppc4.getUpdaterDate().now()).thenReturn(new Date(7, Date.APRIL, 2019));
 
         cases = new Object[][] {
                 {bsppc1, bspp1, bsp1, 1, d1, dateNow, true},

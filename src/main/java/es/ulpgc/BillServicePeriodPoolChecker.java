@@ -12,58 +12,37 @@ public class BillServicePeriodPoolChecker {
         this.updaterDate = new Date();
     }
 
-    /*public boolean addBill(BillServicePeriod billServicePeriod) {
-        Date dateNow = updaterDate.now();
-        billServicePeriodPool.setFinishDate(dateNow);
-        if(billServicePeriodPool.getStartDate() == null) {
-            if(billServicePeriod.getFinishDate().compareTo(dateNow) < 0) {
-                boolean isAdded = billServicePeriodPool.getBillTimeLine().add(billServicePeriod);
-                if(isAdded) {
-                    billServicePeriodPool.setStartDate(billServicePeriod.getStartDate());
-                }
-                return isAdded;
-            } else {
-                return false;
-            }
-        } else {
-            if (billServicePeriod.getFinishDate().compareTo(billServicePeriodPool.getStartDate()) >= 0 &&
-                    billServicePeriod.getFinishDate().compareTo(dateNow) <= 0) {
-                return billServicePeriodPool.getBillTimeLine().add(billServicePeriod);
-            } else {
-                return false;
-            }
-        }
-    }*/
     public boolean addBill(BillServicePeriod billServicePeriod) {
         Date dateNow = updaterDate.now();
         billServicePeriodPool.setFinishDate(dateNow);
-        if(billServicePeriod.getFinishDate().compareTo(dateNow) > 0) return false;
-        if(billServicePeriodPool.getStartDate() == null) {
-            if(billServicePeriodPool.getBillTimeLine().add(billServicePeriod)) {
-                billServicePeriodPool.setStartDate(billServicePeriod.getStartDate());
-                return true;
+        if(billServicePeriod.getFinishDate().compareTo(dateNow) <= 0) {
+            if (billServicePeriodPool.getStartDate() == null) {
+                if (billServicePeriodPool.getBillTimeLine().add(billServicePeriod)) {
+                    billServicePeriodPool.setStartDate(billServicePeriod.getStartDate());
+                    return true;
+                }
+            } else if (billServicePeriod.getFinishDate().compareTo(billServicePeriodPool.getStartDate()) >= 0) {
+                return billServicePeriodPool.getBillTimeLine().add(billServicePeriod);
             }
-            return false;
-        } else if (billServicePeriod.getFinishDate().compareTo(billServicePeriodPool.getStartDate()) >= 0) {
-            return billServicePeriodPool.getBillTimeLine().add(billServicePeriod);
         }
         return false;
     }
 
     public boolean isOverlapping(List<BillServicePeriod> billServicePeriodList, BillServicePeriod billServicePeriod) {
-        for (int i = 0; i < billServicePeriodList.size(); i++) {
-            BillServicePeriod bsp = billServicePeriodList.get(i);
-            if(billServicePeriod.getStartDate().compareTo(bsp.getStartDate()) == 0) return true;
-            if(billServicePeriod.getFinishDate().compareTo(bsp.getFinishDate()) == 0) return true;
-            if(billServicePeriod.getStartDate().compareTo(bsp.getStartDate()) < 0 && billServicePeriod.getFinishDate().compareTo(bsp.getStartDate()) >= 0) return true;
-            if(billServicePeriod.getStartDate().compareTo(bsp.getStartDate()) >= 0 && billServicePeriod.getFinishDate().compareTo(bsp.getFinishDate()) <= 0) return true;
-            if(billServicePeriod.getStartDate().compareTo(bsp.getFinishDate()) <= 0 && billServicePeriod.getFinishDate().compareTo(bsp.getFinishDate()) > 0) return true;
-        }
+        if(billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getStartDate()) == 0) return true;
+        if(billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) == 0) return true;
+        if(billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getStartDate()) < 0 &&
+                billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(0).getStartDate()) >= 0) return true;
+        if(billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getStartDate()) >= 0 &&
+                billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) <= 0) return true;
+        if(billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getFinishDate()) <= 0 &&
+                billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) > 0) return true;
         return false;
     }
 
     public boolean isHavingGaps(List<BillServicePeriod> billServicePeriodList, BillServicePeriod billServicePeriod) {
-        return true;
+        return billServicePeriod.getFinishDate().adjacentDays(billServicePeriodList.get(0).getStartDate()) == -2 ||
+                billServicePeriod.getStartDate().adjacentDays(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) == 2;
     }
 
     public Date getUpdaterDate() {

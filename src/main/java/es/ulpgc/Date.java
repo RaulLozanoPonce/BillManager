@@ -18,6 +18,8 @@ public class Date implements Comparable<Date> {
     public static int NOVEMBER = 10;
     public static int DECEMBER = 11;
 
+    private static int[] DAYOFMONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     private final Integer day;
     private final Integer month;
     private final Integer year;
@@ -53,10 +55,86 @@ public class Date implements Comparable<Date> {
 
     @Override
     public int compareTo(Date date) {
-        if(Objects.requireNonNull(year) < date.getYear()) return -1;
-        if(Objects.requireNonNull(year) > date.getYear()) return 1;
-        if(Objects.requireNonNull(month) < date.getMonth()) return -1;
-        if(Objects.requireNonNull(month) > date.getMonth()) return 1;
-        return Objects.requireNonNull(day).compareTo(date.getDay());
+        int thisYearToCompare = Objects.requireNonNull(year);
+        int otherYearToCompare = Objects.requireNonNull(date.getYear());
+        int thisMonthToCompare = Objects.requireNonNull(month);
+        int otherMonthToCompare = Objects.requireNonNull(date.getMonth());
+        int thisDayToCompare = Objects.requireNonNull(day);
+        int otherDayToCompare = Objects.requireNonNull(date.getDay());
+
+        if(thisYearToCompare < otherYearToCompare) {
+            return -1;
+        } else if(thisYearToCompare > otherYearToCompare) {
+            return 1;
+        } else {
+            if(thisMonthToCompare < otherMonthToCompare) {
+                return -1;
+            } else if(thisMonthToCompare > otherMonthToCompare) {
+                return 1;
+            } else {
+                return Integer.compare(thisDayToCompare, otherDayToCompare);
+            }
+        }
+    }
+
+    public int adjacentDays(Date date) {
+        int thisYearToCompare = Objects.requireNonNull(year);
+        int otherYearToCompare = Objects.requireNonNull(date.getYear());
+        int thisMonthToCompare = Objects.requireNonNull(month);
+        int otherMonthToCompare = Objects.requireNonNull(date.getMonth());
+        int thisDayToCompare = Objects.requireNonNull(day);
+        int otherDayToCompare = Objects.requireNonNull(date.getDay());
+
+        int yearDifference = thisYearToCompare - otherYearToCompare;
+        if(Math.abs(yearDifference) > 1) {
+            return 2*obtainSign(yearDifference);
+        } else if(Math.abs(thisYearToCompare - otherYearToCompare) == 1) {
+            if(this.compareTo(date) < 0) {
+                if(thisDayToCompare == DAYOFMONTH[DECEMBER] && thisMonthToCompare == DECEMBER && otherDayToCompare == 1 && otherMonthToCompare == JANUARY) {
+                    return -1;
+                } else {
+                    return -2;
+                }
+            } else {
+                if(otherDayToCompare == DAYOFMONTH[DECEMBER] && otherMonthToCompare == DECEMBER && thisDayToCompare == 1 && otherMonthToCompare == JANUARY) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+        } else {
+            int monthDifference = thisMonthToCompare - otherMonthToCompare;
+            if(Math.abs(monthDifference) > 1) {
+                return 2*obtainSign(monthDifference);
+            } else if(Math.abs(thisMonthToCompare - otherMonthToCompare) == 1) {
+                if(this.compareTo(date) < 0) {
+                    if(thisDayToCompare == DAYOFMONTH[thisMonthToCompare] && otherDayToCompare == 1) {
+                        return -1;
+                    } else {
+                        return -2;
+                    }
+                } else {
+                    if(otherDayToCompare == DAYOFMONTH[otherMonthToCompare] && thisDayToCompare == 1) {
+                        return 1;
+                    } else {
+                        return 2;
+                    }
+                }
+            } else {
+                int dayDifference = thisDayToCompare - otherDayToCompare;
+                if(dayDifference == -1 || dayDifference == 0 || dayDifference == 1) {
+                    return dayDifference;
+                }
+                return 2*obtainSign(dayDifference);
+            }
+        }
+    }
+
+    private int obtainSign(int number) {
+        if(number < 0) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }

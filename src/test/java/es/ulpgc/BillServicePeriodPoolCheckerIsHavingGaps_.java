@@ -9,8 +9,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(org.junit.runners.Parameterized.class)
-public class BillServicePeriodPoolCheckerIsOverlapping_ {
+@RunWith(Parameterized.class)
+public class BillServicePeriodPoolCheckerIsHavingGaps_ {
 
     private static Object[][] cases;
 
@@ -45,32 +45,32 @@ public class BillServicePeriodPoolCheckerIsOverlapping_ {
         billServicePeriodList.add(new BillServicePeriod(d5, d6));
 
         cases = new Object[][] {
-                {bsppc, billServicePeriodList, new BillServicePeriod(d7, d8), false},
+                {bsppc, billServicePeriodList, new BillServicePeriod(d7, d8), true},
                 {bsppc, billServicePeriodList, new BillServicePeriod(d9, d10), false},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d3, d4), true},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d11, d12), true},
+                {bsppc, billServicePeriodList, new BillServicePeriod(d3, d4), false},
+                {bsppc, billServicePeriodList, new BillServicePeriod(d11, d12), false},
                 {bsppc, billServicePeriodList, new BillServicePeriod(d13, d14), false},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d15, d16), false}
+                {bsppc, billServicePeriodList, new BillServicePeriod(d15, d16), true}
         };
     }
 
     private BillServicePeriodPoolChecker billServicePeriodPoolChecker;
     private List<BillServicePeriod> billServicePeriodList;
     private BillServicePeriod billServicePeriod;
-    private boolean isOverlapping;
+    private boolean isHavingGaps;
 
-    public BillServicePeriodPoolCheckerIsOverlapping_(BillServicePeriodPoolChecker billServicePeriodPoolChecker,
-                                                      List<BillServicePeriod> billServicePeriodList,
-                                                      BillServicePeriod billServicePeriod, boolean isOverlapping) {
+    public BillServicePeriodPoolCheckerIsHavingGaps_(BillServicePeriodPoolChecker billServicePeriodPoolChecker,
+                                                     List<BillServicePeriod> billServicePeriodList,
+                                                     BillServicePeriod billServicePeriod, boolean isHavingGaps) {
         this.billServicePeriodPoolChecker = billServicePeriodPoolChecker;
         this.billServicePeriodList = billServicePeriodList;
         this.billServicePeriod = billServicePeriod;
-        this.isOverlapping = isOverlapping;
+        this.isHavingGaps = isHavingGaps;
     }
 
     @Test
     public void execute(){
-        assertThat(billServicePeriodPoolChecker.isOverlapping(billServicePeriodList, billServicePeriod)).isEqualTo(isOverlapping);
+        assertThat(billServicePeriodPoolChecker.isHavingGaps(billServicePeriodList, billServicePeriod)).isEqualTo(isHavingGaps);
     }
 
     @Parameterized.Parameters

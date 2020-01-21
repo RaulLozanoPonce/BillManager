@@ -26,11 +26,11 @@ public class DateConstructor_ {
                 {-1, 1, -1, InvalidDate.class},
                 {1, -1, -1, InvalidDate.class},
                 {-1, -1, -1, InvalidDate.class},
-
                 {32, Date.JANUARY, 2019, InvalidDate.class},
                 {31, Date.APRIL, 2019, InvalidDate.class},
                 {31, Date.JANUARY, 2019, null},
                 {30, Date.APRIL, 2019, null},
+                {30, 12, 2019, InvalidDate.class},
         };
     }
 

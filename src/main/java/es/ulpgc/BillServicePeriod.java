@@ -6,6 +6,7 @@ public class BillServicePeriod implements Comparable<BillServicePeriod> {
     private final Date finishDate;
 
     public BillServicePeriod(Date startDate, Date finishDate) throws InvalidBillServicePeriod {
+        if(startDate == null || finishDate == null) throw new InvalidBillServicePeriod();
         if(finishDate.compareTo(startDate) <= 0) throw new InvalidBillServicePeriod();
         this.startDate = startDate;
         this.finishDate = finishDate;

@@ -23,7 +23,10 @@ public class BillServicePeriodConstructor_ {
         cases = new Object[][] {
                 {d1, d2, null},
                 {d2, d1, InvalidBillServicePeriod.class},
-                {d1, d3, InvalidBillServicePeriod.class}
+                {d1, d3, InvalidBillServicePeriod.class},
+                {null, d1, InvalidBillServicePeriod.class},
+                {d1, null, InvalidBillServicePeriod.class},
+                {null, null, InvalidBillServicePeriod.class}
         };
     }
 

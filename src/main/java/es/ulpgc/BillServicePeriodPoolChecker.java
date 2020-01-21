@@ -75,25 +75,6 @@ public class BillServicePeriodPoolChecker {
         return false;
     }
 
-    /*
-    * if (billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getStartDate()) == 0)
-                return true;
-            if (billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) == 0)
-                return true;
-            if (billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getStartDate()) < 0 &&
-                    billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(0).getStartDate()) >= 0)
-                return true;
-            if (billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) <= 0 &&
-                    billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) > 0)
-                return true;
-            if (billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getStartDate()) >= 0 &&
-                    billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) <= 0)
-                return true;
-            if (billServicePeriod.getStartDate().compareTo(billServicePeriodList.get(0).getFinishDate()) <= 0 &&
-                    billServicePeriod.getFinishDate().compareTo(billServicePeriodList.get(billServicePeriodList.size() - 1).getFinishDate()) > 0)
-                return true;
-    * */
-
     public boolean isHavingGaps(List<BillServicePeriod> billServicePeriodList, BillServicePeriod billServicePeriod) {
         if(billServicePeriodList.size() > 0) {
             return billServicePeriod.getFinishDate().adjacentDays(billServicePeriodList.get(0).getStartDate()) == -2 ||

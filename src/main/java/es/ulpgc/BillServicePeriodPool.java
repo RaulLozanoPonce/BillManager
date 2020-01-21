@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class BillServicePeriodPool {
 
-    private SortedSet<BillServicePeriod> billTimeLine;
+    private final SortedSet<BillServicePeriod> billTimeLine;
     private Date startDate;
     private Date finishDate;
 
@@ -31,10 +31,6 @@ public class BillServicePeriodPool {
 
     public SortedSet<BillServicePeriod> getBillTimeLine() {
         return billTimeLine;
-    }
-
-    public void setBillTimeLine(SortedSet<BillServicePeriod> billTimeLine) {
-        this.billTimeLine = billTimeLine;
     }
 
     public Date getStartDate() {

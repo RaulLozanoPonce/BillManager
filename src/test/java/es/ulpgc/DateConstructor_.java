@@ -6,8 +6,7 @@ import org.junit.runners.Parameterized;
 
 import es.ulpgc.Date.InvalidDate;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(org.junit.runners.Parameterized.class)
 public class DateConstructor_ {
@@ -31,7 +30,6 @@ public class DateConstructor_ {
                 {31, Date.JANUARY, 2019, null},
                 {30, Date.APRIL, 2019, null},
                 {30, 12, 2019, InvalidDate.class},
-
                 {28, Date.FEBRUARY, 2019, null},
                 {28, Date.FEBRUARY, 2020, null},
                 {29, Date.FEBRUARY, 2019, InvalidDate.class},
@@ -57,9 +55,9 @@ public class DateConstructor_ {
     public void execute(){
         try {
             new Date(day, month, year);
-            assertTrue(exceptionClass == null);
+            assertNull(exceptionClass);
         } catch(InvalidDate e) {
-            assertFalse(exceptionClass == null);
+            assertNotNull(exceptionClass);
         }
     }
 

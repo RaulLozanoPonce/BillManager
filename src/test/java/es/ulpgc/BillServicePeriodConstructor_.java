@@ -7,8 +7,7 @@ import org.junit.runners.Parameterized;
 import es.ulpgc.BillServicePeriod.InvalidBillServicePeriod;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(org.junit.runners.Parameterized.class)
 public class BillServicePeriodConstructor_ {
@@ -48,9 +47,9 @@ public class BillServicePeriodConstructor_ {
             BillServicePeriod bsp = new BillServicePeriod(startDate, finishDate);
             assertThat(bsp.getStartDate().compareTo(startDate)).isEqualTo(0);
             assertThat(bsp.getFinishDate().compareTo(finishDate)).isEqualTo(0);
-            assertTrue(exceptionClass == null);
+            assertNull(exceptionClass);
         } catch(InvalidBillServicePeriod e) {
-            assertFalse(exceptionClass == null);
+            assertNotNull(exceptionClass);
         }
     }
 
@@ -58,5 +57,4 @@ public class BillServicePeriodConstructor_ {
     public static Object[][] cases() {
         return cases;
     }
-
 }

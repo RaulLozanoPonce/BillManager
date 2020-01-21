@@ -112,13 +112,17 @@ public class Date implements Comparable<Date> {
                 return 2*obtainSign(monthDifference);
             } else if(Math.abs(thisMonthToCompare - otherMonthToCompare) == 1) {
                 if(this.compareTo(date) < 0) {
-                    if(thisDayToCompare == DAYOFMONTH[thisMonthToCompare] && otherDayToCompare == 1) {
+                    int maxDay = DAYOFMONTH[thisMonthToCompare];
+                    if(thisMonthToCompare == FEBRUARY && isLeapYear(thisYearToCompare)) maxDay++;
+                    if(thisDayToCompare == maxDay && otherDayToCompare == 1) {
                         return -1;
                     } else {
                         return -2;
                     }
                 } else {
-                    if(otherDayToCompare == DAYOFMONTH[otherMonthToCompare] && thisDayToCompare == 1) {
+                    int maxDay = DAYOFMONTH[otherMonthToCompare];
+                    if(thisMonthToCompare == FEBRUARY && isLeapYear(otherYearToCompare)) maxDay++;
+                    if(otherDayToCompare == maxDay && thisDayToCompare == 1) {
                         return 1;
                     } else {
                         return 2;

@@ -17,29 +17,24 @@ public class BillServicePeriodPoolCheckerIsHavingGaps_ {
     static {
         BillServicePeriodPoolChecker bsppc = new BillServicePeriodPoolChecker(new BillServicePeriodPool());
 
-        Date d1 = new Date(1, Date.FEBRUARY, 2019);
-        Date d2 = new Date(3, Date.MARCH, 2019);
-        Date d3 = new Date(4, Date.MARCH, 2019);
-        Date d4 = new Date(6, Date.APRIL, 2019);
-        Date d5 = new Date(7, Date.APRIL, 2019);
-        Date d6 = new Date(4, Date.MAY, 2019);
-
-        Date d7 = new Date(4, Date.DECEMBER, 2018);
-        Date d8 = new Date(1, Date.JANUARY, 2019);
-
-        Date d9 = new Date(2, Date.JANUARY, 2019);
-        Date d10 = new Date(31, Date.JANUARY, 2019);
-
-        Date d11 = new Date(7, Date.MARCH, 2019);
-        Date d12 = new Date(10, Date.APRIL, 2019);
-
-        Date d13 = new Date(5, Date.MAY, 2019);
-        Date d14 = new Date(2, Date.JUNE, 2019);
-
-        Date d15 = new Date(3, Date.JUNE, 2019);
-        Date d16 = new Date(7, Date.JULY, 2019);
-
         try {
+            Date d1 = new Date(1, Date.FEBRUARY, 2019);
+            Date d2 = new Date(3, Date.MARCH, 2019);
+            Date d3 = new Date(4, Date.MARCH, 2019);
+            Date d4 = new Date(6, Date.APRIL, 2019);
+            Date d5 = new Date(7, Date.APRIL, 2019);
+            Date d6 = new Date(4, Date.MAY, 2019);
+            Date d7 = new Date(4, Date.DECEMBER, 2018);
+            Date d8 = new Date(1, Date.JANUARY, 2019);
+            Date d9 = new Date(2, Date.JANUARY, 2019);
+            Date d10 = new Date(31, Date.JANUARY, 2019);
+            Date d11 = new Date(7, Date.MARCH, 2019);
+            Date d12 = new Date(10, Date.APRIL, 2019);
+            Date d13 = new Date(5, Date.MAY, 2019);
+            Date d14 = new Date(2, Date.JUNE, 2019);
+            Date d15 = new Date(3, Date.JUNE, 2019);
+            Date d16 = new Date(7, Date.JULY, 2019);
+
             List<BillServicePeriod> billServicePeriodList = new ArrayList<>();
             billServicePeriodList.add(new BillServicePeriod(d1, d2));
             billServicePeriodList.add(new BillServicePeriod(d3, d4));

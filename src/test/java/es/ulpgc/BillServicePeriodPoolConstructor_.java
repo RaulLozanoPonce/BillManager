@@ -16,11 +16,11 @@ public class BillServicePeriodPoolConstructor_ {
     private static Object[][] cases;
 
     static {
-        Date d1 = new Date(1, Date.FEBRUARY, 2019);
-        Date d2 = new Date(3, Date.MARCH, 2019);
-        Date d3 = new Date(2, Date.APRIL, 2019);
-
         try {
+            Date d1 = new Date(1, Date.FEBRUARY, 2019);
+            Date d2 = new Date(3, Date.MARCH, 2019);
+            Date d3 = new Date(2, Date.APRIL, 2019);
+
             BillServicePeriod bsp1 = new BillServicePeriod(d1, d2);
             BillServicePeriodPool bspp1 = new BillServicePeriodPool();
             BillServicePeriodPool bspp2 = new BillServicePeriodPool(bsp1);

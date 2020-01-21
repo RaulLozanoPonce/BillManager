@@ -6,15 +6,18 @@ import java.util.List;
 public class BillServicePeriodPoolChecker {
 
     private final BillServicePeriodPool billServicePeriodPool;
-    private Date updaterDate;
+    private DateSensor updaterDate;
 
     public BillServicePeriodPoolChecker(BillServicePeriodPool billServicePeriodPool) {
         this.billServicePeriodPool = billServicePeriodPool;
-        this.updaterDate = new Date();
+        this.updaterDate = new DateSensor();
     }
 
     public boolean addBill(BillServicePeriod billServicePeriod) {
-        Date dateNow = updaterDate.now();
+        Date dateNow = null;
+        try {
+            dateNow = updaterDate.now();
+        } catch (Date.InvalidDate ignored) {}
         billServicePeriodPool.setFinishDate(dateNow);
         if(billServicePeriod.getFinishDate().compareTo(dateNow) <= 0) {
             List<BillServicePeriod> billServicePeriodList = new ArrayList<>(billServicePeriodPool.getBillTimeLine());
@@ -83,11 +86,11 @@ public class BillServicePeriodPoolChecker {
         return false;
     }
 
-    public Date getUpdaterDate() {
+    public DateSensor getUpdaterDate() {
         return updaterDate;
     }
 
-    public void setUpdaterDate(Date updaterDate) {
+    public void setUpdaterDate(DateSensor updaterDate) {
         this.updaterDate = updaterDate;
     }
 }

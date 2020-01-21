@@ -17,19 +17,20 @@ public class DateConstructor_ {
     static {
         cases = new Object[][] {
                 {0, 1, 1, InvalidDate.class},
-                {1, 0, 1, InvalidDate.class},
                 {1, 1, 0, InvalidDate.class},
-                {0, 0, 1, InvalidDate.class},
                 {0, 1, 0, InvalidDate.class},
-                {1, 0, 0, InvalidDate.class},
-                {0, 0, 0, InvalidDate.class},
                 {-1, 1, 1, InvalidDate.class},
                 {1, -1, 1, InvalidDate.class},
                 {1, 1, -1, InvalidDate.class},
                 {-1, -1, 1, InvalidDate.class},
                 {-1, 1, -1, InvalidDate.class},
                 {1, -1, -1, InvalidDate.class},
-                {-1, -1, -1, InvalidDate.class}
+                {-1, -1, -1, InvalidDate.class},
+
+                {32, Date.JANUARY, 2019, InvalidDate.class},
+                {31, Date.APRIL, 2019, InvalidDate.class},
+                {31, Date.JANUARY, 2019, null},
+                {30, Date.APRIL, 2019, null},
         };
     }
 

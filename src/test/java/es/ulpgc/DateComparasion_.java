@@ -17,6 +17,14 @@ public class DateComparasion_ {
         Date d3 = new Date(1, Date.FEBRUARY, 2019);
         Date d4 = new Date(1, Date.MARCH, 2020);
         Date d5 = new Date(7, Date.AUGUST, 2004);
+        Date d6 = new Date(4, Date.MARCH, 2019);
+        Date d7 = new Date(31, Date.JANUARY, 2019);
+        Date d8 = new Date(28, Date.FEBRUARY, 2019);
+        //Date d9 = new Date(29, Date.FEBRUARY, 2020);
+        Date d10 = new Date(30, Date.APRIL, 2019);
+        Date d11 = new Date(1, Date.MAY, 2019);
+        Date d12 = new Date(31, Date.DECEMBER, 2019);
+        Date d13 = new Date(1, Date.JANUARY, 2020);
 
         cases = new Object[][] {
                 {d1, d1, 0, 0},
@@ -33,8 +41,19 @@ public class DateComparasion_ {
                 {d3, d4, -1, -2},
                 {d4, d3, 1, 2},
                 {d1, d5, 1, 2},
-                {d5, d1, -1, -2}
-                
+                {d5, d1, -1, -2},
+                {d2, d6, -1, -1},
+                {d6, d2, 1, 1},
+                {d7, d3, -1, -1},
+                {d3, d7, 1, 1},
+                {d10, d11, -1, -1},
+                {d11, d10, 1, 1},
+                {d8, d1, -1, -1},
+                {d1, d8, 1, 1},
+                //{d9, d4, -1, -1},
+                //{d4, d9, 1, 1},
+                {d12, d13, -1, -1},
+                {d13, d12, 1, 1}
         };
     }
 

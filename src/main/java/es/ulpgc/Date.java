@@ -96,7 +96,7 @@ public class Date implements Comparable<Date> {
                     return -2;
                 }
             } else {
-                if(otherDayToCompare == DAYOFMONTH[DECEMBER] && otherMonthToCompare == DECEMBER && thisDayToCompare == 1 && otherMonthToCompare == JANUARY) {
+                if(otherDayToCompare == DAYOFMONTH[DECEMBER] && otherMonthToCompare == DECEMBER && thisDayToCompare == 1 && thisMonthToCompare == JANUARY) {
                     return 1;
                 } else {
                     return 2;

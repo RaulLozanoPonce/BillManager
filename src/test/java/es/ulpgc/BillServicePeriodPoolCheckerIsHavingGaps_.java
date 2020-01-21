@@ -39,19 +39,21 @@ public class BillServicePeriodPoolCheckerIsHavingGaps_ {
         Date d15 = new Date(3, Date.JUNE, 2019);
         Date d16 = new Date(7, Date.JULY, 2019);
 
-        List<BillServicePeriod> billServicePeriodList = new ArrayList<>();
-        billServicePeriodList.add(new BillServicePeriod(d1, d2));
-        billServicePeriodList.add(new BillServicePeriod(d3, d4));
-        billServicePeriodList.add(new BillServicePeriod(d5, d6));
+        try {
+            List<BillServicePeriod> billServicePeriodList = new ArrayList<>();
+            billServicePeriodList.add(new BillServicePeriod(d1, d2));
+            billServicePeriodList.add(new BillServicePeriod(d3, d4));
+            billServicePeriodList.add(new BillServicePeriod(d5, d6));
 
-        cases = new Object[][] {
-                {bsppc, billServicePeriodList, new BillServicePeriod(d7, d8), true},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d9, d10), false},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d3, d4), false},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d11, d12), false},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d13, d14), false},
-                {bsppc, billServicePeriodList, new BillServicePeriod(d15, d16), true}
-        };
+            cases = new Object[][]{
+                    {bsppc, billServicePeriodList, new BillServicePeriod(d7, d8), true},
+                    {bsppc, billServicePeriodList, new BillServicePeriod(d9, d10), false},
+                    {bsppc, billServicePeriodList, new BillServicePeriod(d3, d4), false},
+                    {bsppc, billServicePeriodList, new BillServicePeriod(d11, d12), false},
+                    {bsppc, billServicePeriodList, new BillServicePeriod(d13, d14), false},
+                    {bsppc, billServicePeriodList, new BillServicePeriod(d15, d16), true}
+            };
+        } catch(Exception ignored) {}
     }
 
     private BillServicePeriodPoolChecker billServicePeriodPoolChecker;

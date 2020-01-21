@@ -31,7 +31,18 @@ public class Date implements Comparable<Date> {
     private void verifyDate(int day, int month, int year) throws InvalidDate {
         if(day <= 0 || month < 0 || year <= 0) throw new InvalidDate();
         if(month >= 12) throw new InvalidDate();
-        if(day > DAYOFMONTH[month]) throw new InvalidDate();
+        if(month == FEBRUARY && isLeapYear(year)) {
+            if(day > DAYOFMONTH[month] + 1) throw new InvalidDate();
+        } else {
+            if(day > DAYOFMONTH[month]) throw new InvalidDate();
+        }
+    }
+
+    private boolean isLeapYear(int year) {
+        boolean divisibleByFour = (year%4) == 0;
+        boolean divisibleByOneHundred = (year%100) == 0;
+        boolean divisibleByFourHundred = (year%400) == 0;
+        return (divisibleByFour && !divisibleByOneHundred) || divisibleByFourHundred;
     }
 
     public int getDay() {

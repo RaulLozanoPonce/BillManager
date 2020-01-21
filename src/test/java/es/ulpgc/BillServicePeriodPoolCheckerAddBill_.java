@@ -14,23 +14,23 @@ public class BillServicePeriodPoolCheckerAddBill_ {
     private static Object[][] cases;
 
     static {
-        Date dateNow = new Date(18, Date.APRIL, 2019);
-        Date dateNow2 = new Date(3, Date.JUNE, 2019);
-
-        Date d1 = new Date(1, Date.FEBRUARY, 2019);
-        Date d2 = new Date(3, Date.MARCH, 2019);
-        Date d3 = new Date(4, Date.MARCH, 2019);
-        Date d4 = new Date(6, Date.APRIL, 2019);
-        Date d5 = new Date(7, Date.APRIL, 2019);
-        Date d6 = new Date(4, Date.MAY, 2019);
-        Date d7 = new Date(5, Date.MAY, 2019);
-        Date d8 = new Date(2, Date.JUNE, 2019);
-        Date d9 = new Date(2, Date.MARCH, 2019);
-        Date d10 = new Date(8, Date.MAY, 2019);
-        Date d11 = new Date(18, Date.MARCH, 2019);
-        Date d12 = new Date(18, Date.APRIL, 2019);
-
         try {
+            Date dateNow = new Date(18, Date.APRIL, 2019);
+            Date dateNow2 = new Date(3, Date.JUNE, 2019);
+
+            Date d1 = new Date(1, Date.FEBRUARY, 2019);
+            Date d2 = new Date(3, Date.MARCH, 2019);
+            Date d3 = new Date(4, Date.MARCH, 2019);
+            Date d4 = new Date(6, Date.APRIL, 2019);
+            Date d5 = new Date(7, Date.APRIL, 2019);
+            Date d6 = new Date(4, Date.MAY, 2019);
+            Date d7 = new Date(5, Date.MAY, 2019);
+            Date d8 = new Date(2, Date.JUNE, 2019);
+            Date d9 = new Date(2, Date.MARCH, 2019);
+            Date d10 = new Date(8, Date.MAY, 2019);
+            Date d11 = new Date(18, Date.MARCH, 2019);
+            Date d12 = new Date(18, Date.APRIL, 2019);
+
             BillServicePeriod bsp1 = new BillServicePeriod(d1, d2);
             BillServicePeriod bsp2 = new BillServicePeriod(d3, d4);
             BillServicePeriod bsp3 = new BillServicePeriod(d5, d6);
@@ -67,29 +67,29 @@ public class BillServicePeriodPoolCheckerAddBill_ {
             BillServicePeriodPoolChecker bsppc11 = new BillServicePeriodPoolChecker(bspp11);
             BillServicePeriodPoolChecker bsppc12 = new BillServicePeriodPoolChecker(bspp12);
 
-            bsppc1.setUpdaterDate(mock(Date.class));
+            bsppc1.setUpdaterDate(mock(DateSensor.class));
             when(bsppc1.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc2.setUpdaterDate(mock(Date.class));
+            bsppc2.setUpdaterDate(mock(DateSensor.class));
             when(bsppc2.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc3.setUpdaterDate(mock(Date.class));
+            bsppc3.setUpdaterDate(mock(DateSensor.class));
             when(bsppc3.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc4.setUpdaterDate(mock(Date.class));
+            bsppc4.setUpdaterDate(mock(DateSensor.class));
             when(bsppc4.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc5.setUpdaterDate(mock(Date.class));
+            bsppc5.setUpdaterDate(mock(DateSensor.class));
             when(bsppc5.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc6.setUpdaterDate(mock(Date.class));
+            bsppc6.setUpdaterDate(mock(DateSensor.class));
             when(bsppc6.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc7.setUpdaterDate(mock(Date.class));
+            bsppc7.setUpdaterDate(mock(DateSensor.class));
             when(bsppc7.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc8.setUpdaterDate(mock(Date.class));
+            bsppc8.setUpdaterDate(mock(DateSensor.class));
             when(bsppc8.getUpdaterDate().now()).thenReturn(new Date(18, Date.APRIL, 2019));
-            bsppc9.setUpdaterDate(mock(Date.class));
+            bsppc9.setUpdaterDate(mock(DateSensor.class));
             when(bsppc9.getUpdaterDate().now()).thenReturn(new Date(3, Date.JUNE, 2019));
-            bsppc10.setUpdaterDate(mock(Date.class));
+            bsppc10.setUpdaterDate(mock(DateSensor.class));
             when(bsppc10.getUpdaterDate().now()).thenReturn(new Date(3, Date.JUNE, 2019));
-            bsppc11.setUpdaterDate(mock(Date.class));
+            bsppc11.setUpdaterDate(mock(DateSensor.class));
             when(bsppc11.getUpdaterDate().now()).thenReturn(new Date(3, Date.JUNE, 2019));
-            bsppc12.setUpdaterDate(mock(Date.class));
+            bsppc12.setUpdaterDate(mock(DateSensor.class));
             when(bsppc12.getUpdaterDate().now()).thenReturn(new Date(3, Date.JUNE, 2019));
 
             cases = new Object[][] {

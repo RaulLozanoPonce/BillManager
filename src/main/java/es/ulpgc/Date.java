@@ -1,8 +1,5 @@
 package es.ulpgc;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
 public class Date implements Comparable<Date> {
 
     public static int JANUARY = 0;
@@ -20,47 +17,54 @@ public class Date implements Comparable<Date> {
 
     private static int[] DAYOFMONTH = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    private final Integer day;
-    private final Integer month;
-    private final Integer year;
+    private final int day;
+    private final int month;
+    private final int year;
 
-    public Date() {
-        this.day = null;
-        this.month = null;
-        this.year = null;
-    }
-
-    public Date(int day, int month, int year) {
+    public Date(int day, int month, int year) throws InvalidDate {
+        verifyDate(day, month, year);
         this.day = day;
         this.month = month;
         this.year = year;
     }
 
-    public Integer getDay() {
+    private void verifyDate(int day, int month, int year) throws InvalidDate {
+        if(day <= 0 || month < 0 || year <= 0) throw new InvalidDate();
+        if(month >= 12) throw new InvalidDate();
+        if(month == FEBRUARY && isLeapYear(year)) {
+            if(day > DAYOFMONTH[month] + 1) throw new InvalidDate();
+        } else {
+            if(day > DAYOFMONTH[month]) throw new InvalidDate();
+        }
+    }
+
+    private boolean isLeapYear(int year) {
+        boolean divisibleByFour = (year%4) == 0;
+        boolean divisibleByOneHundred = (year%100) == 0;
+        boolean divisibleByFourHundred = (year%400) == 0;
+        return (divisibleByFour && !divisibleByOneHundred) || divisibleByFourHundred;
+    }
+
+    public int getDay() {
         return day;
     }
 
-    public Integer getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public Integer getYear() {
+    public int getYear() {
         return year;
-    }
-
-    public Date now() {
-        LocalDate localDate = LocalDate.now();
-        return new Date(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
     }
 
     @Override
     public int compareTo(Date date) {
-        int thisYearToCompare = Objects.requireNonNull(year);
-        int otherYearToCompare = Objects.requireNonNull(date.getYear());
-        int thisMonthToCompare = Objects.requireNonNull(month);
-        int otherMonthToCompare = Objects.requireNonNull(date.getMonth());
-        int thisDayToCompare = Objects.requireNonNull(day);
-        int otherDayToCompare = Objects.requireNonNull(date.getDay());
+        int thisYearToCompare = year;
+        int otherYearToCompare = date.getYear();
+        int thisMonthToCompare = month;
+        int otherMonthToCompare = date.getMonth();
+        int thisDayToCompare = day;
+        int otherDayToCompare = date.getDay();
 
         if(thisYearToCompare < otherYearToCompare) {
             return -1;
@@ -78,12 +82,12 @@ public class Date implements Comparable<Date> {
     }
 
     public int adjacentDays(Date date) {
-        int thisYearToCompare = Objects.requireNonNull(year);
-        int otherYearToCompare = Objects.requireNonNull(date.getYear());
-        int thisMonthToCompare = Objects.requireNonNull(month);
-        int otherMonthToCompare = Objects.requireNonNull(date.getMonth());
-        int thisDayToCompare = Objects.requireNonNull(day);
-        int otherDayToCompare = Objects.requireNonNull(date.getDay());
+        int thisYearToCompare = year;
+        int otherYearToCompare = date.getYear();
+        int thisMonthToCompare = month;
+        int otherMonthToCompare = date.getMonth();
+        int thisDayToCompare = day;
+        int otherDayToCompare = date.getDay();
 
         int yearDifference = thisYearToCompare - otherYearToCompare;
         if(Math.abs(yearDifference) > 1) {
@@ -96,7 +100,7 @@ public class Date implements Comparable<Date> {
                     return -2;
                 }
             } else {
-                if(otherDayToCompare == DAYOFMONTH[DECEMBER] && otherMonthToCompare == DECEMBER && thisDayToCompare == 1 && otherMonthToCompare == JANUARY) {
+                if(otherDayToCompare == DAYOFMONTH[DECEMBER] && otherMonthToCompare == DECEMBER && thisDayToCompare == 1 && thisMonthToCompare == JANUARY) {
                     return 1;
                 } else {
                     return 2;
@@ -108,13 +112,17 @@ public class Date implements Comparable<Date> {
                 return 2*obtainSign(monthDifference);
             } else if(Math.abs(thisMonthToCompare - otherMonthToCompare) == 1) {
                 if(this.compareTo(date) < 0) {
-                    if(thisDayToCompare == DAYOFMONTH[thisMonthToCompare] && otherDayToCompare == 1) {
+                    int maxDay = DAYOFMONTH[thisMonthToCompare];
+                    if(thisMonthToCompare == FEBRUARY && isLeapYear(thisYearToCompare)) maxDay++;
+                    if(thisDayToCompare == maxDay && otherDayToCompare == 1) {
                         return -1;
                     } else {
                         return -2;
                     }
                 } else {
-                    if(otherDayToCompare == DAYOFMONTH[otherMonthToCompare] && thisDayToCompare == 1) {
+                    int maxDay = DAYOFMONTH[otherMonthToCompare];
+                    if(thisMonthToCompare == FEBRUARY && isLeapYear(otherYearToCompare)) maxDay++;
+                    if(otherDayToCompare == maxDay && thisDayToCompare == 1) {
                         return 1;
                     } else {
                         return 2;
@@ -136,5 +144,9 @@ public class Date implements Comparable<Date> {
         } else {
             return 1;
         }
+    }
+
+    public class InvalidDate extends Exception {
+
     }
 }

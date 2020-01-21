@@ -26,4 +26,8 @@ public class BillServicePeriod implements Comparable<BillServicePeriod> {
         if(finishDate.compareTo(billServicePeriod.getFinishDate()) > 0) return 1;
         return 0;
     }
+
+    public class InvalidBillServicePeriod extends Exception {
+
+    }
 }
